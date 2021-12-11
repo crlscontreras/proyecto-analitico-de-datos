@@ -1,0 +1,50 @@
+drop table if exists pelicula cascade;
+drop table if exists peliculaGenero cascade;
+drop table if exists peliculaKeywords cascade;
+drop table if exists personaPeliculaRol cascade;
+
+
+CREATE TABLE pelicula(
+	color varchar,
+	num_critic_for_reviews varchar,
+	duration varchar,
+	gross varchar,
+	movie_title varchar,
+	num_voted_users varchar,
+	cast_total_facebook_likes varchar,
+	facenumber_in_poster varchar,
+	movie_imdb_link varchar,
+	num_user_for_reviews varchar,
+	language varchar,
+	country varchar,
+	content_rating varchar,
+	budget varchar,
+	title_year varchar,
+	imdb_score float,
+	aspect_ratio float,
+	movie_facebook_likes varchar,
+	primary key(movie_imdb_link)
+);
+
+CREATE TABLE peliculaGenero(
+	movie_imdb_link varchar,
+	genreName varchar,
+	primary key(movie_imdb_link, genreName),
+	foreign key(movie_imdb_link) references pelicula(movie_imdb_link)
+);
+
+CREATE TABLE peliculaKeywords(
+	movie_imdb_link varchar,
+	plotKeywords varchar,
+	primary key(movie_imdb_link, plotKeywords),
+	foreign key(movie_imdb_link) references pelicula(movie_imdb_link)
+);
+
+CREATE TABLE personaPeliculaRol(
+	personName varchar,
+	movie_imdb_link varchar,
+	roleName varchar,
+	facebook_likes varchar,
+	primary key(personName, movie_imdb_link, roleName),
+	foreign key(movie_imdb_link) references pelicula(movie_imdb_link)
+);
